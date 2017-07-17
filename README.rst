@@ -1,4 +1,4 @@
-This is the old version of CONCISE. I'm currently working on a new version. Stay tuned.
+This is the old version of CONCISE. Here is the new version: https://github.com/gagneurlab/concise
 
 ===============================
 CONCISE
