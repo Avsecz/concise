@@ -13,3 +13,5 @@ py.test:
     - tox --version
   script:
     - tox
+  tags:
+    - docker
