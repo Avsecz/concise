@@ -270,7 +270,10 @@ class CMongoTrials(MongoTrials):
     def n_ok(self):
         """Number of ok trials()
         """
-        return np.sum(np.array(self.statuses()) == "ok")
+        if len(self.trials) == 0:
+            return 0
+        else:
+            return np.sum(np.array(self.statuses()) == "ok")
 
     def get_ok_results(self, verbose=True):
         """Return a list of results with ok status
