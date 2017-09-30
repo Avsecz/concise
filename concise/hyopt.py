@@ -130,10 +130,10 @@ class CMongoTrials(MongoTrials):
         rank=1 means second best
         ...
         """
-        if len(self.trials) == 0:
-            return None
         candidates = [t for t in self.trials
                       if t['result']['status'] == STATUS_OK]
+        if len(candidates) == 0:
+            return None
         losses = [float(t['result']['loss']) for t in candidates]
         assert not np.any(np.isnan(losses))
         lid = np.where(np.argsort(losses).argsort() == rank)[0][0]
