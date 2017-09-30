@@ -148,6 +148,7 @@ def test_hyopt(tmpdir):
 
     best = fmin(fn, hyper_params, trials=trials, algo=tpe.suggest, max_evals=2)
     assert len(trials) == 2
+    assert len(trials) == trials.n_ok()
     assert isinstance(best, dict)
     assert "m_filters" in best
 
@@ -177,6 +178,7 @@ def test_hyopt(tmpdir):
     fn_test(fn, hyper_params, tmp_dir=str(tmpdir))
     best = fmin(fn, deepcopy(hyper_params), trials=trials, algo=tpe.suggest, max_evals=2)
     assert len(trials) == 2
+    assert len(trials) == trials.n_ok()
     assert isinstance(best, dict)
     assert "m_filters" in best
 

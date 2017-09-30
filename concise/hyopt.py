@@ -267,9 +267,17 @@ class CMongoTrials(MongoTrials):
         model_path = self.get_trial(tid)["result"]["path"]["model"]
         return load_model(model_path)
 
+    def n_ok(self):
+        """Number of ok trials()
+        """
+        return np.sum(np.array(self.statuses()) == "ok")
+
     def get_ok_results(self, verbose=True):
         """Return a list of results with ok status
         """
+        if len(self.trials) == 0:
+            return []
+
         not_ok = np.where(np.array(self.statuses()) != "ok")[0]
 
         if len(not_ok) > 0 and verbose:
@@ -277,7 +285,8 @@ class CMongoTrials(MongoTrials):
             print("Trials: " + str(not_ok))
             print("Statuses: " + str(np.array(self.statuses())[not_ok]))
 
-        r = [merge_dicts({"tid": t["tid"]}, t["result"].to_dict()) for t in self.trials if t["result"]["status"] == "ok"]
+        r = [merge_dicts({"tid": t["tid"]}, t["result"].to_dict())
+             for t in self.trials if t["result"]["status"] == "ok"]
         return r
 
     def as_df(self, ignore_vals=["history"], separator=".", verbose=True):
