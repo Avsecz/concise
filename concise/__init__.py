@@ -22,9 +22,11 @@ from .legacy.get_data import prepare_data
 from keras.utils.generic_utils import get_custom_objects
 custom_objects_modules = [initializers, metrics, regularizers, layers,
                           losses, optimizers]
+custom_objects = {}
 for mod in custom_objects_modules:
     for f in mod.AVAILABLE:
         get_custom_objects()[f] = mod.get(f)
+        custom_objects = mod.get(f)
 
 # remove variables from the scope
 del get_custom_objects
